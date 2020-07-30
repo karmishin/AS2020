@@ -29,7 +29,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Системное имя</th>
                     <th scope="col">Наименование</th>
-                    <th scope="col">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,10 +36,6 @@
                     <th th:text="${role.id}" scope="row"></th>
                     <td th:text="${role.systemName} "></td>
                     <td th:text="${role.userFriendlyName}"></td>
-                    <td>
-                        <a th:href="@{'/roles/' + ${role.id} + '/edit'}"><img th:src="@{/static/icons/edit.svg}"/></a>
-                        <a th:href="@{'/roles/' + ${role.id} + '/remove'}"><img th:src="@{/static/icons/delete.svg}"/></a>
-                    </td>
                 </tr>
                 </tbody>
             </table>

@@ -3,19 +3,22 @@ package xyz.karmishin.drontaxiweb.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import xyz.karmishin.drontaxiweb.entities.Role;
 import xyz.karmishin.drontaxiweb.entities.User;
+import xyz.karmishin.drontaxiweb.repositories.UserRepository;
 import xyz.karmishin.drontaxiweb.services.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
 public class UsersController {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserService userService;
@@ -27,16 +30,43 @@ public class UsersController {
         return "users";
     }
 
+    @GetMapping("/users/add")
+    public String addUserGet(Model model) {
+        model.addAttribute("user", new User());
+        return "adduser";
+    }
+
+    @PostMapping("/users/add")
+    public String addUserPost(@Valid @ModelAttribute("user") User newUser, @RequestParam(value="adminCheckbox", required = false) boolean adminCheckboxChecked, Model model) {
+        if (adminCheckboxChecked) {
+            newUser.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN", "Администратор")));
+        }
+
+        if (userService.saveUser(newUser)) {
+            return "redirect:/users";
+        } else {
+            return "newuser";
+        }
+    }
+    
     @GetMapping("/users/{id}/edit")
     public String editUserGet(@PathVariable Long id, Model model) {
-        User user = userService.id(id);
-        model.addAttribute("object", "user");
-        model.addAttribute("user", user);
+        User userToUpdate = userRepository.getOne(id);
+        model.addAttribute("user", userToUpdate);
         return "edit";
     }
     
-    @PostMapping("/users")
-    public String editUserPost(@Valid @ModelAttribute("user") User user, Model model) {
+    @PostMapping("/users/{id}/edit")
+    public String editUserPost(@Valid @ModelAttribute("user") User updatedUser, @PathVariable Long id, Model model) {
+        User userToUpdate = userRepository.getOne(id);
+        userToUpdate.setUsername(updatedUser.getUsername());
+        userRepository.save(userToUpdate);
+        return "redirect:/users";
+    }
+    
+    @GetMapping("/users/{id}/delete")
+    public String deleteUser(@PathVariable Long id, Model model) {
+        userRepository.delete(userRepository.getOne(id));
         return "redirect:/users";
     }
 

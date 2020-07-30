@@ -19,7 +19,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <h1 class="h2">Пользователи</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-success">Создать</button>
+                    <a th:href="@{/users/add}"><button type="button" class="btn btn-success">Создать</button></a>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                     <td th:text="${user.roles}"></td>
                     <td>
                         <a th:href="@{'/users/' + ${user.id} + '/edit'}"><img th:src="@{/static/icons/edit.svg}"/></a>
-                        <a th:href="@{'/users/' + ${user.id} + '/remove'}"><img th:src="@{/static/icons/delete.svg}"/></a>
+                        <a th:href="@{'/users/' + ${user.id} + '/delete'}"><img th:src="@{/static/icons/delete.svg}"/></a>
                     </td>
                 </tr>
                 </tbody>

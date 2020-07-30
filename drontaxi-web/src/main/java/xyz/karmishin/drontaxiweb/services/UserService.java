@@ -33,8 +33,8 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User id(Long id) {
-        return userRepository.findById(id).get();
+    public User getOne(Long id) {
+        return userRepository.getOne(id);
     }
 
     public List<User> all() {

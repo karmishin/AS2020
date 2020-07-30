@@ -17,13 +17,13 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 th:text="'Редактирование профиля ' + ${user.username}" class="h2"></h1>
+                <h1 class="h2">Создание пользователя</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <a th:href="@{/users}" class="btn btn-danger">Отменить</a>
                 </div>
             </div>
 
-            <form th:action="@{./edit}" th:object="${user}" method="post">
+            <form th:action="@{./add}" th:object="${user}" method="post">
                 <div class="form-group">
                     <label for="username">Логин: </label>
                     <input placeholder="Логин" id="username" type="text" th:field="*{username}" class="form-control" required>
@@ -63,7 +63,13 @@
                     <label for="birthdate">Дата рождения:</label>
                     <input placeholder="Дата рождения" id="birthdate" type="date" th:field="*{birthdate}" class="form-control" required>
                 </div>
-                <input type="submit" class="btn btn-lg btn-success btn-block" value="Сохранить">
+
+                <div class="form-group">
+                    <input type="checkbox" id="adminCheckbox" name="adminCheckbox" value="true">
+                    <label for="adminCheckbox">Сделать администратором</label>
+                </div>
+
+                <input type="submit" class="btn btn-lg btn-success btn-block" value="Создать пользователя">
             </form>
         </main>
     </div>
