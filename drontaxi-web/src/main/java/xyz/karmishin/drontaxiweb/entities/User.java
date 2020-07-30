@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 
@@ -24,7 +25,9 @@ public class User implements UserDetails {
     @NotEmpty
     private String emailAddress;
     @NotEmpty
-    private String firstName, lastName, patronym, phoneNumber, birthdate;
+    private String firstName, lastName, patronym, birthdate;
+    @Pattern(message="Неправильный формат номера телефона", regexp = "^[+]7\\d{10}")
+    private String phoneNumber;
     private enum gender { MALE, FEMALE };
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

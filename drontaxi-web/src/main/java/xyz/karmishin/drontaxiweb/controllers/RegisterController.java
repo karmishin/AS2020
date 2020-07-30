@@ -33,6 +33,7 @@ public class RegisterController {
     @PostMapping
     public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("errorList", bindingResult.getAllErrors());
             return "register";
         }
         if (!user.getPassword().equals(user.getPasswordConfirm())){

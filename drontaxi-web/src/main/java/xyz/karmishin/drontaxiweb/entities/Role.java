@@ -67,4 +67,9 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getSystemName();
     }
+
+    @Override
+    public String toString() {
+        return getUserFriendlyName();
+    }
 }

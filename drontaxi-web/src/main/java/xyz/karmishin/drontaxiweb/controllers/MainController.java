@@ -11,7 +11,7 @@ import xyz.karmishin.drontaxiweb.services.UserService;
 public class MainController {
     @GetMapping("/")
     public String root() {
-        return "index";
+        return "redirect:/orders";
     }
 
     @RequestMapping("/login")

@@ -15,7 +15,8 @@ public class Order {
     @ManyToOne
     private User operator;
     private String departureAddress, destinationAddress;
-    private enum status { EN_ROUTE, WAITING, COMPLETE, CANCELLED };
+    private enum Status { EN_ROUTE, WAITING, COMPLETE, CANCELLED };
+    private Status currentStatus;
     @ManyToOne
     @JoinColumn(name = "drone_id")
     private Drone drone;
@@ -68,4 +69,11 @@ public class Order {
         this.drone = drone;
     }
 
+    public Status getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(Status currentStatus) {
+        this.currentStatus = currentStatus;
+    }
 }
