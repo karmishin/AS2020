@@ -20,7 +20,7 @@
 1. Импорт БД
 
 ```bash
-psql as2020 < release/as2020_karmishin.sql
+psql as2020 < release/as2020.sql
 ```
 
 2. Запуск сервера
@@ -30,5 +30,8 @@ java -jar release/drontaxi-web-0.0.1-SNAPSHOT.jar
 ```
 
 3. Зайти на [localhost:8080](http://localhost:8080) и авторизоваться. 
-Обычный пользователь: логин - user, пароль - user.
-Администратор: логин - admin, пароль - admin.
+
+Пользователи | Логин | Пароль 
+-------------| ----- | ------
+Обычный | user | user 
+Администратор | admin | admin
