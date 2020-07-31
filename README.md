@@ -35,3 +35,5 @@ java -jar release/drontaxi-web-0.0.1-SNAPSHOT.jar
 -------------| ----- | ------
 Обычный | user | user 
 Администратор | admin | admin
+
+*Пользователь PostgreSQL: user1;donthackme*
